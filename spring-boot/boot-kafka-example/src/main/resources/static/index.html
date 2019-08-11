@@ -24,8 +24,8 @@
 
         <form class="form-inline">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="World">
+                <label for="message">Message</label>
+                <input type="text" class="form-control" id="message" placeholder="Message">
             </div>
             <button id="invoke" type="submit" class="btn btn-success">Invoke</button>
         </form>
@@ -44,8 +44,8 @@
   $(document).ready(function () {
     $("#invoke").click(function (e) {
       var n = $("#name").val() || "World";
-      $.getJSON("/api/greeting?name=" + n, function (res) {
-        $("#greeting-result").text(JSON.stringify(res));
+      $.getJSON("/api/send?message=" + n, function (res) {
+        //$("#greeting-result").text(JSON.stringify(res));
       });
       e.preventDefault();
     });
