@@ -25,8 +25,11 @@ import org.springframework.kafka.core.ProducerFactory;
 @EnableKafka
 @Configuration
 public class KafkaTopicConfig {
-    @Value(value = "${kafka.bootstrapAddress:my-cluster-kafka-bootstrap:9092}")
+    @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
+    
+    @Value(value = "${kafka.topic}")
+    private String topic;
  
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -37,7 +40,7 @@ public class KafkaTopicConfig {
      
     @Bean
     public NewTopic topic1() {
-         return new NewTopic("baeldung", 1, (short) 1);
+         return new NewTopic(topic, 1, (short) 1);
     }
     
     @Bean
@@ -88,9 +91,9 @@ public class KafkaTopicConfig {
         return factory;
     }
     
-    @KafkaListener(topics = "baeldung", groupId = "group1")
+    @KafkaListener(topics = "${kafka.topic}", groupId = "group1")
     public void listen(String message) {
-        System.out.println("Received Messasge in group group1: " + message);
+        System.out.println("Received Messasge in kafka group group1: " + message);
     }
     
     
