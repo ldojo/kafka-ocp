@@ -17,7 +17,7 @@ import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
 public class KafkaTopicConfig {
-    @Value(value = "${kafka.bootstrapAddress:my-cluster-kafka-bootstrap}")
+    @Value(value = "${kafka.bootstrapAddress:my-cluster-kafka-bootstrap:9092}")
     private String bootstrapAddress;
  
     @Bean
