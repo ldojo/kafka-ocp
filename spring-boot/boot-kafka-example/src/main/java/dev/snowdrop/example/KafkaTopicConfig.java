@@ -91,7 +91,7 @@ public class KafkaTopicConfig {
         return factory;
     }
     
-    @KafkaListener(topics = "${kafka.topic}", groupId = "group1")
+    @KafkaListener(topics = "topic1", groupId = "group1")
     public void listen(String message) {
         System.out.println("Received Messasge in kafka group group1: " + message);
     }
