@@ -44,7 +44,7 @@ public class GreetingEndpoint {
     
     @GET
     @Path("/send")
-    public void sendMessage(String message) {
+    public void sendMessage(@QueryParam("message") String message) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("baeldung", message);
         
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
