@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 
 @Configuration
 public class KafkaTopicConfig {
-    @Value(value = "${kafka.bootstrapAddress}")
+    @Value(value = "${kafka.bootstrapAddress:my-cluster-kafka-bootstrap}")
     private String bootstrapAddress;
  
     @Bean
