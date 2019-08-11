@@ -21,15 +21,44 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Path("/greeting")
 @Component
 public class GreetingEndpoint {
+	
+	@Autowired
+	private KafkaTemplate<String, String> kafkaTemplate;
+	
     @GET
     @Produces("application/json")
     public Greeting greeting(@QueryParam("name") @DefaultValue("World") String name) {
         final String message = String.format(Greeting.FORMAT, name);
         return new Greeting(message);
+    }
+    
+    @GET
+    @Path("/send")
+    public void sendMessage(String message) {
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("baeldung", message);
+        
+        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+     
+            @Override
+            public void onSuccess(SendResult<String, String> result) {
+                System.out.println("Sent message=[" + message + 
+                  "] with offset=[" + result.getRecordMetadata().offset() + "]");
+            }
+            @Override
+            public void onFailure(Throwable ex) {
+                System.out.println("Unable to send message=["
+                  + message + "] due to : " + ex.getMessage());
+            }
+        });
     }
 }
