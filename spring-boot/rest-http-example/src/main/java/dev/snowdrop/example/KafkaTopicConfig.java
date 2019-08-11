@@ -66,9 +66,9 @@ public class KafkaTopicConfig {
         props.put(
           ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, 
           bootstrapAddress);
-//        props.put(
-//          ConsumerConfig.GROUP_ID_CONFIG, 
-//          "group1");
+        props.put(
+          ConsumerConfig.GROUP_ID_CONFIG, 
+          "group1");
         props.put(
           ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, 
           StringDeserializer.class);
@@ -88,7 +88,7 @@ public class KafkaTopicConfig {
         return factory;
     }
     
-    @KafkaListener(topics = "baeldung")
+    @KafkaListener(topics = "baeldung", groupId = "group1")
     public void listen(String message) {
         System.out.println("Received Messasge in group group1: " + message);
     }
