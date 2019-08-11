@@ -27,8 +27,8 @@
   <name>Spring Boot - HTTP Example</name>
   <description>Spring Boot - HTTP Example</description>
   <properties>
-    <spring-boot-bom.version>1.5.19.SP1</spring-boot-bom.version>
-    <spring-boot.version>1.5.19.RELEASE</spring-boot.version>
+    <spring-boot-bom.version>2.1.6.Final</spring-boot-bom.version>
+    <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
     <arquillian.version>1.4.0.Final</arquillian.version>
     <awaitility.version>3.1.0</awaitility.version>
     <rest-assured.version>3.1.0</rest-assured.version>
@@ -141,6 +141,11 @@
       <artifactId>assertj-core</artifactId>
       <scope>test</scope>
     </dependency>
+	<dependency>
+		<groupId>org.springframework.kafka</groupId>
+		<artifactId>spring-kafka</artifactId>
+<!-- 		<version>2.2.7.RELEASE</version> -->
+	</dependency>
   </dependencies>
   <build>
     <resources>
