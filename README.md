@@ -30,3 +30,13 @@ oc logs -f bc/boot-kafka-example
 oc expose svc/boot-kafka-example
 #if all is successful, you should be able to go to this address in your browser:
 echo "http://$(oc get route boot-kafka-example -o jsonpath='{.spec.host}{"\n"}')"
+```
+
+5. In the Webapp, type in some message, and view the corresponding OCP pod logs
+If you type in a string like "msg1", you should then see logs like this in the pod:
+```
+INFO: Sent message=[msg1] with offset=[3]
+INFO: Received Messasge in kafka group group1: msg1
+```
+
+That confims that the Spring Boot code is both pushing the message onto a Kafka topic, as well as receiving it, confirming communication with the Kafka cluster installed via AMQ Streams

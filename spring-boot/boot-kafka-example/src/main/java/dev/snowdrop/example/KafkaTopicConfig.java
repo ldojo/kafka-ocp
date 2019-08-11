@@ -2,6 +2,7 @@ package dev.snowdrop.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -93,7 +94,7 @@ public class KafkaTopicConfig {
     
     @KafkaListener(topics = "bael", groupId = "group1")
     public void listen(String message) {
-        System.out.println("Received Messasge in kafka group group1: " + message);
+        Logger.getLogger(this.getClass().getName()).info("Received Messasge in kafka group group1: " + message);
     }
     
     
